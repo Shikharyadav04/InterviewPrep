@@ -2,6 +2,7 @@
 
 import { auth, db } from "@/firebase/admin";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const Signup = async (params: SignUpParams) => {
   const { uid, name, email } = params;
@@ -112,4 +113,12 @@ export const getCurrentUser = async (): Promise<User | null> => {
 export const isAuthenticated = async () => {
   const user = await getCurrentUser();
   return !!user;
+};
+
+export const SignOut = async () => {
+  const cookieStore = await cookies();
+  cookieStore.set("session", "", {
+    maxAge: 0,
+  });
+  redirect("/sign-in");
 };
