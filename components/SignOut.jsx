@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 import { SignOut } from "@/lib/action/auth.action";
 import { useTransition } from "react";
 import { toast } from "sonner";
+import { auth } from "@/firebase/client";
 
 export default function SignOutButton() {
   const [isPending, startTransition] = useTransition();
 
   const handleSignOut = async () => {
     try {
-      const auth = getAuth();
       await signOut(auth);
 
       startTransition(() => {
