@@ -18,7 +18,6 @@ import {
 } from "firebase/auth";
 import { auth } from "@/firebase/client";
 import { SignIn, Signup } from "@/lib/action/auth.action";
-// import { Link } from "lucide-react";
 
 const authFormSchema = (type: FormType) => {
   return z.object({

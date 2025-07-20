@@ -15,7 +15,9 @@ export const POST = async (request: Request) => {
       prompt: `Prepare questions for a job interview.
         The job role is ${role}.
         The job experience level is ${level}.
-        The tech stack used in the job is: ${techstack}.
+        The tech stack used in the job is: ${
+          techstack ?? "React,Nodejs,Express,MongoDB"
+        }.
         The focus between behavioural and technical questions should lean towards: ${type}.
         The amount of questions required is: ${amount}.
         Please return only the questions, without any additional text.
