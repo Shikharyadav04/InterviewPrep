@@ -1,6 +1,7 @@
 "use client";
 
 import { interviewer } from "@/constants";
+import { createFeedback } from "@/lib/action/general.action";
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapu.sdk";
 import Image from "next/image";
@@ -67,12 +68,14 @@ const Agent = ({
   const handleGenerateFeedback = async (messages: SavedMessage[]) => {
     console.log("Generate Feedback");
 
-    const { success, id } = {
-      success: true,
-      id: "feedback_id",
-    };
+    const { success, feedbackId } = await createFeedback({
+      interviewId: interviewId!,
+      userId: userId!,
+      transcript: messages,
+    });
 
-    if (success && id) router.push(`/interview/${interviewId}/feedback`);
+    if (success && feedbackId)
+      router.push(`/interview/${interviewId}/feedback`);
     else router.push("/");
   };
 

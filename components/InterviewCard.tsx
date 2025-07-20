@@ -5,7 +5,8 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import DisplayTechstacks from "./DisplayTechstacks";
 import { getRandomInterviewCover } from "@/lib/utils";
-const InterviewCard = ({
+import { getFeedbackByInterviewId } from "@/lib/action/general.action";
+const InterviewCard = async ({
   id,
   userId,
   role,
@@ -13,7 +14,10 @@ const InterviewCard = ({
   techstack,
   createdAt,
 }: InterviewCardProps) => {
-  const feedback = null as Feedback | null;
+  const feedback =
+    userId && id
+      ? await getFeedbackByInterviewId({ userId, interviewId: id })
+      : null;
   const normalisedType = /mix/gi.test(type) ? "Mixed" : type;
   const date = dayjs(feedback?.createdAt || createdAt || Date.now()).format(
     "MMM D,YYYY"
