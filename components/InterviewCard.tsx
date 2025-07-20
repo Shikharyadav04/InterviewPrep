@@ -6,7 +6,7 @@ import Link from "next/link";
 import DisplayTechstacks from "./DisplayTechstacks";
 import { getRandomInterviewCover } from "@/lib/utils";
 const InterviewCard = ({
-  interviewId,
+  id,
   userId,
   role,
   type,
@@ -58,11 +58,7 @@ const InterviewCard = ({
           <DisplayTechstacks techStack={techstack} />
           <Button className="btn-primary">
             <Link
-              href={
-                feedback
-                  ? `/interview/${interviewId}/feedback`
-                  : `/interview/${interviewId}`
-              }
+              href={feedback ? `/interview/${id}/feedback` : `/interview/${id}`}
             >
               {feedback ? "View Feedback" : "View Interview"}
             </Link>
